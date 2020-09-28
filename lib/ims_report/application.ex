@@ -6,9 +6,11 @@ defmodule ImsReport.Application do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
     children = [
       # Starts a worker by calling: ImsReport.Worker.start_link(arg)
       # {ImsReport.Worker, arg}
+      supervisor(ImsReport.Repo, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
