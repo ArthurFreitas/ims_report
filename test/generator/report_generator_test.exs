@@ -19,7 +19,7 @@ defmodule ImsReport.Test.ReportGeneratorTest do
       quantity: 50
     }
   ]
-  @report_path "product_report.csv"
+  @product_report_path "reports/product_report.csv"
 
   describe "create" do
     test_with_mock "calls report writer with queried data",
@@ -32,7 +32,7 @@ defmodule ImsReport.Test.ReportGeneratorTest do
 
       ReportGenerator.create(:product)
 
-      assert_called(ReportWriter.write(data,@report_path))
+      assert_called(ReportWriter.write(data,@product_report_path))
     end
   end
 end
