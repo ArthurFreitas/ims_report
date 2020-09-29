@@ -6,4 +6,10 @@ defmodule ImsReport.ProductHelper do
   def list do
     Repo.all(Product)
   end
+
+  def insert(attrs \\ %{}) do
+    %Product{}
+    |> Product.changeset(attrs)
+    |> Repo.insert()
+  end
 end
