@@ -80,3 +80,5 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :ims_report, :mail_service_api_url, "http://localhost:4002/api"

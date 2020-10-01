@@ -46,7 +46,9 @@ defmodule ImsReport.MixProject do
       {:mongodb_ecto, "~> 0.2.1"},
       {:task_bunny, "~> 0.3.4"},
       {:mock, "~> 0.3.0", only: :test},
-      {:csv, "~> 2.4"}
+      {:csv, "~> 2.4"},
+      {:tesla, "~> 1.3.0"},
+      {:hackney, "~> 1.10"}
     ]
   end
 

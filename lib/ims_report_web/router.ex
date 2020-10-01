@@ -13,6 +13,12 @@ defmodule ImsReportWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", ImsReportWeb do
+    pipe_through :api
+
+    post "/create", ReportController, :create
+  end
+
   scope "/", ImsReportWeb do
     pipe_through :browser
 
