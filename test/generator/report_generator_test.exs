@@ -26,7 +26,7 @@ defmodule ImsReport.Test.ReportGeneratorTest do
   describe "create" do
     test_with_mock "calls report writer with queried data",
       ReportWriter, [], [write: fn(_list, _path) -> :ok end] do
-      data = insert_dummy_data_into_db
+      data = insert_dummy_data_into_db()
       ReportGenerator.create(:product)
 
       assert_called(ReportWriter.write(data,@product_report_path))
@@ -37,7 +37,7 @@ defmodule ImsReport.Test.ReportGeneratorTest do
         {ReportWriter, [], [write: fn(_list, :as_string) -> "csv_string" end]},
         {MailService, [], [sendReport: fn("csv_string", @to_email) -> :ok end]}
       ]) do
-        data = insert_dummy_data_into_db
+        data = insert_dummy_data_into_db()
         ReportGenerator.create(:product, @to_email)
 
         assert_called(ReportWriter.write(data, :as_string))
@@ -48,7 +48,7 @@ defmodule ImsReport.Test.ReportGeneratorTest do
 
   defp insert_dummy_data_into_db do
     Enum.map(@product_dummy_data, fn(e) ->
-      {ok, %Product{} = product} = ProductHelper.insert(e)
+      {_ok, %Product{} = product} = ProductHelper.insert(e)
       Map.delete(product, :__meta__)
     end)
   end

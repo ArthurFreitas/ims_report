@@ -30,7 +30,7 @@ defmodule ImsReport.Test.ReportWriterTest do
       ("valid_path", _opts) -> {:ok, :io_device}
       ("non_valid_path", _opts) -> {:error, :reason}
     end]},
-    {IO, [:passthrough], [write: fn(io_device, data) -> :ok end]}
+    {IO, [:passthrough], [write: fn(:io_device, _data) -> :ok end]}
   ]) do
     :ok
   end
@@ -56,7 +56,7 @@ defmodule ImsReport.Test.ReportWriterTest do
     test "returns a valid csv String" do
       csv = ReportWriter.write(@dummy_data, :as_string)
 
-      assert csv = "SKU,barcode,description,id,name,price,quantity\r\nSKU1,00000001,desc1,id1,teste1,1,1\r\nSKU2,00000002,desc2,id2,teste2,2,2\r\n"
+      assert csv == "SKU,barcode,description,id,name,price,quantity\r\nSKU1,00000001,desc1,id1,teste1,1,1\r\nSKU2,00000002,desc2,id2,teste2,2,2\r\n"
     end
   end
 end
