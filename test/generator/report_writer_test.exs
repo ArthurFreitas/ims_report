@@ -52,5 +52,11 @@ defmodule ImsReport.Test.ReportWriterTest do
       assert_called(File.open("non_valid_path", [:write, :utf8]))
       assert {:error, _} = status
     end
+
+    test "returns a valid csv String" do
+      csv = ReportWriter.write(@dummy_data, :as_string)
+
+      assert csv = "SKU,barcode,description,id,name,price,quantity\r\nSKU1,00000001,desc1,id1,teste1,1,1\r\nSKU2,00000002,desc2,id2,teste2,2,2\r\n"
+    end
   end
 end
