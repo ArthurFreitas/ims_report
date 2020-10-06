@@ -3,16 +3,14 @@ defmodule ImsReport.Job.ReportJob do
   alias ImsReport.Generator.ReportGenerator
 
   def perform(%{"action" => action, "type" => type, "email" => email}) do
-    action
-    |> call_report_generator([
+    call_report_generator(action, [
       String.to_atom(type),
       email
     ])
     :ok
   end
   def perform(%{"action" => action, "type" => type}) do
-    action
-    |> call_report_generator([
+    call_report_generator(action, [
       String.to_atom(type)
     ])
     :ok

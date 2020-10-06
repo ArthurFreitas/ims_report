@@ -6,7 +6,6 @@ defmodule ImsReportWeb.ReportController do
     |> Map.put("action", "create")
     |> ImsReport.Job.ReportJob.enqueue()
 
-    conn
-    |> json("")
+    json(conn, "")
   end
 end
