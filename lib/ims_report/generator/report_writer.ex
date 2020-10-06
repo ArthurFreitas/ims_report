@@ -3,7 +3,8 @@ defmodule ImsReport.Generator.ReportWriter do
   def write(struct_list, path) when is_bitstring(path) do
     case File.open(path, [:write, :utf8]) do
       {:ok, file} ->
-        write(struct_list, :as_stream)
+        struct_list
+        |> write(:as_stream)
         |> Enum.each(&IO.write(file, &1))
         :ok
 
@@ -12,12 +13,14 @@ defmodule ImsReport.Generator.ReportWriter do
   end
 
   def write(struct_list, :as_string) do
-    write(struct_list, :as_stream)
+    struct_list
+    |> write(:as_stream)
     |> Enum.join("")
   end
 
   def write(struct_list, :as_stream) do
-    ReportParser.parse_structs_to_matrix(struct_list)
+    struct_list
+    |> ReportParser.parse_structs_to_matrix()
     |> CSV.encode()
   end
 end

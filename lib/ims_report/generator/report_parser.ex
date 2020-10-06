@@ -4,9 +4,7 @@ defmodule ImsReport.Generator.ReportParser do
 
   def parse_structs_to_matrix(struct_list) do
     headers = get_headers(struct_list)
-
-    data_lists = struct_list
-    |> Enum.map(&parse_struct_to_list(&1,headers))
+    data_lists = Enum.map(struct_list, &parse_struct_to_list(&1,headers))
 
     [headers | data_lists]
   end
@@ -18,8 +16,7 @@ defmodule ImsReport.Generator.ReportParser do
   end
 
   defp parse_struct_to_list(struct_list, headers) do
-    headers
-    |> Enum.map(
+    Enum.map(headers,
       fn(k) ->
         Map.get(struct_list, k) || @default_missing_data_value
       end

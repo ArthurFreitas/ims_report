@@ -9,8 +9,7 @@ defmodule ImsReport.Generator.ReportGenerator do
   def create(type) do
     case type do
     :product ->
-      ProductHelper.list()
-      |> ReportWriter.write(path_for_report_type(type))
+      ReportWriter.write(ProductHelper.list(), path_for_report_type(type))
     end
   end
 
