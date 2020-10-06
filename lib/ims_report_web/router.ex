@@ -23,6 +23,7 @@ defmodule ImsReportWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/sentry_check", PageController, :sentry_check
   end
 
   # Other scopes may use custom stacks.

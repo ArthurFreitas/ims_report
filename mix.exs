@@ -48,7 +48,8 @@ defmodule ImsReport.MixProject do
       {:mock, "~> 0.3.0", only: :test},
       {:csv, "~> 2.4"},
       {:tesla, "~> 1.3.0"},
-      {:hackney, "~> 1.10"}
+      {:hackney, "~> 1.10"},
+      {:sentry, "8.0.0"}
     ]
   end
 
