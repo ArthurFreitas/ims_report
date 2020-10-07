@@ -6,17 +6,24 @@ defmodule ImsReport.Generator.ReportGenerator do
   @report_base_path "reports/"
   @csv_report_suffix "_report.csv"
 
-  def create(type) do
-    case type do
-    :product ->
-      ReportWriter.write(ProductHelper.list(), path_for_report_type(type))
+  def create(:product) do
+    case ProductHelper.list() do
+      [] ->
+        Sentry.capture_message("report_for_empty_list", extra: %{reason: "can't write a report for a empty product list"})
+        {:error,"can't write a report for a empty product list"}
+      list ->
+        ReportWriter.write(list, path_for_report_type(:product))
     end
+
   end
 
-  def create(type, email) do
-    case type do
-      :product ->
-        ProductHelper.list()
+  def create(:product, email) do
+    case ProductHelper.list() do
+      [] ->
+        Sentry.capture_message("report_for_empty_list", extra: %{reason: "can't write a report for a empty product list"})
+        {:error,"can't write a report for a empty product list"}
+      list ->
+        list
         |> ReportWriter.write(:as_string)
         |> MailService.sendReport(email)
     end

@@ -44,6 +44,10 @@ defmodule ImsReport.Test.ReportGeneratorTest do
         assert_called(MailService.sendReport("csv_string", @to_email))
       end
     end
+
+    test "returns error if there is no data to make a report" do
+      assert {:error,"can't write a report for a empty product list"} == ReportGenerator.create(:product)
+    end
   end
 
   defp insert_dummy_data_into_db do
